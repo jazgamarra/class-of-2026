@@ -4,6 +4,7 @@ import EventCard from '../components/EventCard.astro';
 import Countdown from '../components/Countdown.astro';
 import GraduateList from '../components/GraduateList.astro';
 import Gallery from '../components/Gallery.astro';
+import Icon from '../components/Icon.astro';
 import { events } from '../data/events';
 import { graduateGroups } from '../data/graduates';
 import { siteContent } from '../data/siteContent';
@@ -13,14 +14,17 @@ import sunsetHero from '../assets/images/group-picture-with-sunset-closer.jpeg';
 const featuredEvent = events.find((event) => event.id === 'colacion');
 ---
 
-<InvitationLayout title="Class of 2026 · Invitación">
+<InvitationLayout
+  title="Invitación a la colación de la promo 2026 del Colegio Sagrado Corazón de Jesús"
+  description="Invitación a la colación de la promo 2026 del Colegio Sagrado Corazón de Jesús."
+>
   <main>
     <section class="hero" id="inicio">
       <Image class="hero-image" src={sunsetHero} alt="" widths={[900, 1400, 2000]} sizes="100vw" loading="eager" />
       <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
       <nav class="site-nav section-shell" aria-label="Navegación principal">
         <a class="brand-mark" href="#inicio" aria-label="Volver al inicio">class of 2026</a>
-        <a class="nav-link" href="#eventos">Ver detalles <span aria-hidden="true">↓</span></a>
+        <a class="nav-link" href="#eventos">Ver detalles <Icon name="arrow-down" /></a>
       </nav>
       <div class="hero-content section-shell">
         <p class="eyebrow">CENTRO EDUCATIVO SAGRADO CORAZÓN DE JESÚS</p>
@@ -39,7 +43,7 @@ const featuredEvent = events.find((event) => event.id === 'colacion');
     <Gallery />
     <GraduateList groups={graduateGroups} />
 
-    <section class="closing-section section-shell"><div class="closing-star" aria-hidden="true">✦</div><p class="section-kicker">Nos vemos en la fiesta de colación</p><h2>Que esta celebración sea<br /><em>tan especial como el camino.</em></h2><p>{siteContent.closing}</p><a class="button button-light" href="#inicio">Volver al inicio <span aria-hidden="true">↑</span></a></section>
+    <section class="closing-section section-shell"><div class="closing-star" aria-hidden="true">✦</div><p class="section-kicker">Nos vemos en la fiesta de colación</p><h2>Que esta celebración sea<br /><em>tan especial como el camino.</em></h2><p>{siteContent.closing}</p><a class="button button-light" href="#inicio">Volver al inicio <Icon name="arrow-up" /></a></section>
   </main>
   <footer class="site-footer section-shell"><span>class of 2026</span><span>Con cariño, la promoción</span></footer>
 </InvitationLayout>

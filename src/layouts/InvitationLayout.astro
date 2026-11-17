@@ -1,7 +1,16 @@
 ---
 import '../styles/global.css';
 
-const { title = 'Class of 2026' } = Astro.props;
+const {
+  title = 'Class of 2026',
+  description = 'Invitación a la colación de la Class of 2026.',
+  image = '/og-preview.jpeg',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const imagePath = image.replace(/^\//, '');
+const basePath = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const imageUrl = new URL(`${basePath}${imagePath}`, Astro.site ?? Astro.url);
 ---
 
 <!doctype html>
@@ -10,7 +19,23 @@ const { title = 'Class of 2026' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#f7f1e8" />
-    <meta name="description" content="Invitación a la colación de la Class of 2026." />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PY" />
+    <meta property="og:site_name" content="Class of 2026" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content="La promoción Class of 2026 reunida al atardecer" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="4000" />
+    <meta property="og:image:height" content="2512" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
     <title>{title}</title>
   </head>
   <body>

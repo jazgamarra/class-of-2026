@@ -1,5 +1,6 @@
 ---
 import type { EventItem } from '../data/events';
+import Icon from './Icon.astro';
 
 const { event, featured = false } = Astro.props as { event: EventItem; featured?: boolean };
 ---
@@ -13,7 +14,7 @@ const { event, featured = false } = Astro.props as { event: EventItem; featured?
     <p class="event-place">{event.place}</p>
     {event.note && <p class="event-note">{event.note}</p>}
     <a class="map-link" href={event.mapUrl} target="_blank" rel="noreferrer">
-      Ver ubicación <span aria-hidden="true">↗</span>
+      Ver ubicación <Icon name="arrow-up-right" />
     </a>
   </div>
 </article>
