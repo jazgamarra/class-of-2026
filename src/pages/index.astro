@@ -1,0 +1,45 @@
+---
+import InvitationLayout from '../layouts/InvitationLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import Countdown from '../components/Countdown.astro';
+import GraduateList from '../components/GraduateList.astro';
+import Gallery from '../components/Gallery.astro';
+import { events } from '../data/events';
+import { graduateGroups } from '../data/graduates';
+import { siteContent } from '../data/siteContent';
+import { Image } from 'astro:assets';
+import sunsetHero from '../assets/images/group-picture-with-sunset-closer.jpeg';
+
+const featuredEvent = events.find((event) => event.id === 'colacion');
+---
+
+<InvitationLayout title="Class of 2026 · Invitación">
+  <main>
+    <section class="hero" id="inicio">
+      <Image class="hero-image" src={sunsetHero} alt="" widths={[900, 1400, 2000]} sizes="100vw" loading="eager" />
+      <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+      <nav class="site-nav section-shell" aria-label="Navegación principal">
+        <a class="brand-mark" href="#inicio" aria-label="Volver al inicio">class of 2026</a>
+        <a class="nav-link" href="#eventos">Ver detalles <span aria-hidden="true">↓</span></a>
+      </nav>
+      <div class="hero-content section-shell">
+        <p class="eyebrow">CENTRO EDUCATIVO SAGRADO CORAZÓN DE JESÚS</p>
+        <h1>{siteContent.title}</h1>
+        <div class="hero-divider"><span></span><i>✦</i><span></span></div>
+        <p class="hero-intro">{siteContent.intro}</p>
+      </div>
+    </section>
+
+    <section class="events-section section-shell" id="eventos" aria-labelledby="events-title">
+      <div class="section-heading events-heading"><h2 id="events-title">Agendá las fechas</h2></div>
+      <div class="events-list">{events.map((event) => <EventCard event={event} featured={event.id === featuredEvent?.id} />)}</div>
+    </section>
+
+    <Countdown target={featuredEvent?.isoDate ?? '2026-12-17T21:00:00-03:00'} />
+    <Gallery />
+    <GraduateList groups={graduateGroups} />
+
+    <section class="closing-section section-shell"><div class="closing-star" aria-hidden="true">✦</div><p class="section-kicker">Nos vemos en la fiesta de colación</p><h2>Que esta celebración sea<br /><em>tan especial como el camino.</em></h2><p>{siteContent.closing}</p><a class="button button-light" href="#inicio">Volver al inicio <span aria-hidden="true">↑</span></a></section>
+  </main>
+  <footer class="site-footer section-shell"><span>class of 2026</span><span>Con cariño, la promoción</span></footer>
+</InvitationLayout>

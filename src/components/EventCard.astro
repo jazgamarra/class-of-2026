@@ -1,0 +1,19 @@
+---
+import type { EventItem } from '../data/events';
+
+const { event, featured = false } = Astro.props as { event: EventItem; featured?: boolean };
+---
+
+<article class:list={['event-card', { featured }]}>
+  <div class="event-number" aria-hidden="true">{event.id === 'misa' ? '01' : event.id === 'certificados' ? '02' : '03'}</div>
+  <div class="event-content">
+    <p class="event-label">{event.label}</p>
+    <h3>{event.title}</h3>
+    <p class="event-date">{event.dateLabel}{event.timeLabel && ` · ${event.timeLabel}`}</p>
+    <p class="event-place">{event.place}</p>
+    {event.note && <p class="event-note">{event.note}</p>}
+    <a class="map-link" href={event.mapUrl} target="_blank" rel="noreferrer">
+      Ver ubicación <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,68 @@
+---
+import type { GraduateGroup } from '../data/graduates';
+
+const { groups } = Astro.props as { groups: GraduateGroup[] };
+---
+
+<section class="graduates-section section-shell" id="colados" aria-labelledby="graduates-title">
+  <div class="section-heading">
+    <p class="section-kicker">La promoción</p>
+    <h2 id="graduates-title">Quienes hacen<br /><em>posible este momento.</em></h2>
+    <p>Celebramos el esfuerzo y el camino de cada integrante de la promoción.</p>
+  </div>
+
+  <div class="graduate-tabs" role="tablist" aria-label="Cursos de la promoción">
+    {groups.map((group, index) => (
+      <button
+        class:list={['graduate-tab', { active: index === 0 }]}
+        id={`tab-${group.id}`}
+        role="tab"
+        aria-selected={index === 0 ? 'true' : 'false'}
+        aria-controls={`panel-${group.id}`}
+        data-tab={group.id}
+      >
+        <span>{group.shortName}</span><small>{group.count} colados</small>
+      </button>
+    ))}
+  </div>
+
+  {groups.map((group, index) => (
+    <div
+      class:list={['graduates-panel', { 'is-visible': index === 0 }]}
+      id={`panel-${group.id}`}
+      role="tabpanel"
+      aria-labelledby={`tab-${group.id}`}
+      data-panel={group.id}
+      hidden={index !== 0}
+    >
+      <div class="panel-heading">
+        <div><h3>{group.shortName}</h3><p>{group.fullName}</p></div>
+        <span>{group.count}</span>
+      </div>
+      <ol class="name-grid">
+        {group.names.map((name) => <li>{name}</li>)}
+      </ol>
+    </div>
+  ))}
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-panel]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const selected = tab.dataset.tab;
+      tabs.forEach((item) => {
+        const isSelected = item === tab;
+        item.classList.toggle('active', isSelected);
+        item.setAttribute('aria-selected', String(isSelected));
+      });
+      panels.forEach((panel) => {
+        const isVisible = panel.dataset.panel === selected;
+        panel.hidden = !isVisible;
+        panel.classList.toggle('is-visible', isVisible);
+      });
+    });
+  });
+</script>
