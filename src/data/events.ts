@@ -38,7 +38,7 @@ export const events: EventItem[] = [
     dateLabel: 'Jueves 17 de diciembre',
     timeLabel: '21:00 hs',
     isoDate: '2026-12-17T21:00:00-03:00',
-    place: 'Talleywand Costanera',
+    place: 'Talleyrand Costanera',
     mapUrl: 'https://maps.app.goo.gl/2L9VUBkVkyhn239P8',
     note: 'Tenida: Elegante',
   },
