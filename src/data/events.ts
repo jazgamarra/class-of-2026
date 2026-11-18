@@ -40,6 +40,6 @@ export const events: EventItem[] = [
     isoDate: '2026-12-17T21:00:00-03:00',
     place: 'Talleywand Costanera',
     mapUrl: 'https://maps.app.goo.gl/2L9VUBkVkyhn239P8',
-    note: 'El gran encuentro para celebrar todo lo alcanzado.',
+    note: 'Tenida: Elegante',
   },
 ];
